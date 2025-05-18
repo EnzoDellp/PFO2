@@ -4,7 +4,7 @@ services:
   webserver:
     build: .
     ports:
-      - "8081:80"
+      - "8081:80" # Mapea puerto 8081 local al 80 del contenedor
     depends_on:
       - mysqlserver
     networks:
