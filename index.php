@@ -4,13 +4,17 @@ $db = 'testdb';
 $user = 'root';
 $pass = 'rootpass';
 
-$conn = new mysqli($host, $user, $pass, $db);
+$mysqli = new mysqli($host, $user, $pass, $db);
 
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+if ($mysqli->connect_error) {
+    die("Conexión fallida: " . $mysqli->connect_error);
 }
 
-$result = $conn->query("SELECT * FROM productos");
+$result = $mysqli->query("SELECT * FROM productos");
+if (!$result) {
+    die("Error en consulta: " . $mysqli->error);
+}
+
 
 echo "<h1>Lista de productos</h1><ul>";
 while ($row = $result->fetch_assoc()) {
@@ -18,5 +22,5 @@ while ($row = $result->fetch_assoc()) {
 }
 echo "</ul>";
 
-$conn->close();
+$mysqli->close();
 ?>
