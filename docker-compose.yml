@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  webserver:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysqlserver
+    networks:
+      - mynetwork
+
+  mysqlserver:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: testdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+
+volumes:
+  mysql_data:
